@@ -55,14 +55,19 @@ FROM
 WHERE
     book_id BETWEEN 7 AND 15;
 
-select book_id, title, length(title) as title_length from book_store group by book_id order by rand() limit 10;
+
+SELECT 
+    book_id, title, LENGTH(title) AS title_length
+FROM
+    book_store
+GROUP BY book_id
+ORDER BY RAND()
+LIMIT 10;
 
 -- 1)
-select * from book_store where (book_id % 2 = 0 and price > 10)  
-and (select substring(title,0, 11) as short_title, concat(substring(title,1,11), '...') from book_store);
+-- select * from book_store where (book_id % 2 = 0 and price > 10)  
+-- and (select substring(title,0, 11) as short_title, concat(substring(title,1,11), '...') from book_store);
 
-select * , substring(title,1,10), concat(substring(title,1,10),'...') as short_title from book_store
-where book_id
 
 SELECT * , 
        SUBSTRING(title, 1, 10) AS short_title,
@@ -72,19 +77,105 @@ WHERE book_id % 2 = 0
   AND price > 10;
 
 
-select * from book_store where title ;
+SELECT 
+    *
+FROM
+    book_store
+WHERE
+    title;
 
 
 select * from book_store order by price desc limit 2 offset 1; 
 select * from book_store order by price desc;
-
-select * from book_store where price = (select max(price) from book_store);
+SELECT 
+    *
+FROM
+    book_store
+WHERE
+    price = (SELECT 
+            MAX(price)
+        FROM
+            book_store);
 
 
 select * from book_store;
-select substring(title,1,5) as short_title from book_store;
+SELECT 
+    SUBSTRING(title, 1, 5) AS short_title
+FROM
+    book_store;
 
 
-select *, concat(substring(title, 1, 11), '...') as short_title from book_store where
-title is not null and
-price > 10;
+SELECT 
+    *, CONCAT(SUBSTRING(title, 1, 11), '...') AS short_title
+FROM
+    book_store
+WHERE
+    title IS NOT NULL AND price > 10;
+    
+    
+SELECT 
+    UPPER(title) AS upper_title
+FROM
+    book_store;
+    
+    
+SELECT 
+    LOWER(title) AS lower_title
+FROM
+    book_store;
+    
+    
+SELECT 
+    SUBSTRING(title, 1, 10) AS sub_string
+FROM
+    book_store;
+    
+
+SELECT * ,
+    REPLACE(title, 'the_replaced', 'The') AS replaced_title
+FROM
+    book_store;
+    
+    
+SELECT 
+    *, TRIM(' ' FROM title) AS white_removed
+FROM
+    book_store;
+
+
+SELECT TRIM('   Hello World   ') AS TrimmedString;
+SELECT TRIM(BOTH 'x' FROM 'xxxHello Worldxxx') AS Result;
+SELECT TRIM(LEADING 'x' FROM 'xxxHello Worldxxx') AS Result;
+SELECT TRIM(TRAILING 'x' FROM 'xxxHello Worldxxx') AS Result;
+SELECT CONCAT('!!!', 'Hello', '!!!') AS TrimmedString;
+SELECT TRIM(BOTH '!' FROM CONCAT('!!!', 'Hello', '!!!')) AS TrimmedString;
+
+select reverse(title) from book_store;
+select reverse(upper(substring(title, 1, 10))) from book_store;
+select reverse(upper(title)) from book_store;
+
+select title, right(title, 6) as right_title from book_store;
+select title, left(title, 7) as left_title from book_store;
+select *, left(right(title, 6), 3) as right_left_char from book_store;
+
+select title, char_length(title) as character_length from book_store;
+select title, length(title) as character_length from book_store;
+
+select title, instr(title, 'a') as position from book_store;
+
+select title, lpad(title, 15, '-') as left_padded from book_store;
+select title, rpad(title, 15, '*') as right_padded from book_store;
+select title, rpad(substring(title, 1,5), 30, '*') as right_padded from book_store;
+
+select concat(title, space(5), author) as title_space_author from book_store;
+
+select title, ascii(left(title, 1)) as first_letter_ascii from book_store;
+
+SELECT 
+    UPPER(Title) AS Uppercase_Title,
+    LOWER(Author) AS Lowercase_Author,
+    CONCAT(Title, ' by ', Author) AS Full_Details,
+    SUBSTRING(Title, 1, 10) AS Short_Title,
+    LENGTH(Title) AS Title_Length
+FROM
+    book_store;
