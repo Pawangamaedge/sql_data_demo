@@ -32,4 +32,113 @@ INSERT INTO events (event_name, event_date, event_time, event_date_time) VALUES
 
 select * from events;
 
+-- returns the current date and time 
+-- now() functions is used in mysql, mariadb, postgresql
+-- this is not sql standard functions
+select now() as new_current_date_time;
+
+-- returns the current date 
+select curdate() as new_current_date;
+
+
+-- returns the current time
+select curtime() as new_current_time;
+
+-- return the current date and time
+-- current_timestamp() part of sql standard, can be used in various data bases
+select current_timestamp() as new_time_stamp;
+
+-- returns the system current date
+select sysdate() as new_system_date;
+
+-- returns the current date and time of sql server
+select getdate() as new_sql_server_time;
+
+-- returns the current date
+SELECT CURRENT_DATE() AS new_date;
+
+-- returns the current time
+select current_time() as new_time;
+
+select * from events;
+SELECT 
+    *
+FROM
+    events
+WHERE
+    event_date = CURDATE();
+    
+
+SELECT 
+    *
+FROM
+    events
+WHERE
+    event_date_time < NOW();
+    
+    
+SELECT 
+    *
+FROM
+    events
+WHERE
+    event_date = CURRENT_DATE();
+    
+    
+SELECT 
+    *
+FROM
+    events
+WHERE
+    event_date > CURRENT_DATE();
+    
+select * from events;	
+
+
+SELECT 
+    event_name, event_date
+FROM
+    events
+WHERE
+    MONTH(event_date) > 10;
+    
+    
+SELECT 
+    event_name, event_date
+FROM
+    events
+WHERE
+    HOUR(event_time) < 12;
+    
+    
+SELECT 
+    event_name, event_date
+FROM
+    events
+WHERE
+    MINUTE(event_date_time);
+    
+    
+SELECT 
+    MONTH(event_date) AS event_month, COUNT(*) AS total_events
+FROM
+    events
+GROUP BY event_month;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
